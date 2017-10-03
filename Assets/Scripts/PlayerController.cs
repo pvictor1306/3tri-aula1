@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+Idle - 0
+Jump - 1
+Run - 2
+Falling - 3
+Shooting - 4
+Hurt - 5
+*/
+
 public class PlayerController : MonoBehaviour {
 
 	public float horizontalSpeed = 5f;
@@ -9,10 +18,14 @@ public class PlayerController : MonoBehaviour {
 
 	Rigidbody2D rb;
 	SpriteRenderer sr;
+	Animator anim;
+
+	bool isJumping = false;
 
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 		sr = GetComponent<SpriteRenderer>();
+		anim = GetComponent<Animator>();
 	}
 	
 	void Update () {
@@ -39,13 +52,24 @@ public class PlayerController : MonoBehaviour {
 		else if (speed > 0f) {	
 			sr.flipX = false;
 		}
+
+		if(!isJumping){
+		anim.SetInteger("State", 2);
+		}
 	}
 
 	void StopMovingHorizontal(){
 		rb.velocity = new Vector2(0f, rb.velocity.y);
+		if(!isJumping){
+		anim.SetInteger("State", 0);
+		}
+
 	}
 
 	void Jump(){
+		isJumping = true;
 		rb.AddForce(new Vector2(0f, jumpSpeed));
+
+		anim.SetInteger("State", 1);
 	}
 }
