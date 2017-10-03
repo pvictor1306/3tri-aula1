@@ -23,6 +23,9 @@ ExportedObj/
 *.svd
 *.pdb
 
+# VS Code
+/.vscode/
+
 # Unity3D generated meta files
 *.pidb.meta
 
