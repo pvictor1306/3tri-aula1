@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour {
 	void Jump(){
 		if (isGrounded){
 		isJumping = true;
+		AudioManager.instance.PlayJumpSound(gameObject);
 		rb.AddForce(new Vector2(0f, jumpSpeed));
 		anim.SetInteger("State", 1);
 		Invoke("EnableDoubleJump", delayForDoubleJump);
@@ -103,6 +104,7 @@ public class PlayerController : MonoBehaviour {
 
 		if (canDoubleJump && !isGrounded) {
 		rb.velocity = Vector2.zero;
+		AudioManager.instance.PlayJumpSound(gameObject);
 		rb.AddForce(new Vector2(0f, jumpSpeed));
 		anim.SetInteger("State", 1);
 		canDoubleJump = false;
@@ -121,6 +123,7 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.gameObject.CompareTag("Coin")){
+			AudioManager.instance.PlayCoinPickupSound(other.gameObject);
 			SFxManager.instance.ShowCoinParticles(other.gameObject);
 			Destroy(other.gameObject);
 		}
