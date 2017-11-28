@@ -67,7 +67,7 @@ public class GM : MonoBehaviour {
 	public void CloseApp(){
 		Application.Quit();
 	}
-	
+
 	public void LoadScene(string sceneName) {
 		SceneManager.LoadScene(sceneName);
 	}
@@ -126,7 +126,17 @@ public class GM : MonoBehaviour {
 	
 	public void RespawnPlayer(){
 		Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+
 }
+
+	public void LevelComplete(){
+		Destroy(player.gameObject);
+		timerOn = false;
+		ui.levelComplete.txtCoinCount.text = "Coins: " + data.coinCount;
+		ui.levelComplete.txtTimer.text = "Timer: " + timeLeft.ToString("F1");
+		ui.levelComplete.LevelCompletePanel.SetActive(true);
+		
+	}
 
 	
 }
