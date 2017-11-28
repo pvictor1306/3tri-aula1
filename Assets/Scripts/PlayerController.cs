@@ -125,6 +125,7 @@ public class PlayerController : MonoBehaviour {
 		if(other.gameObject.CompareTag("Coin")){
 			AudioManager.instance.PlayCoinPickupSound(other.gameObject);
 			SFxManager.instance.ShowCoinParticles(other.gameObject);
+			GM.instance.IncrementeCoinCount();
 			Destroy(other.gameObject);
 		}
 	}
